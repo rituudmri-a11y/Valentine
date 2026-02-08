@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Important Question</title>
+
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:black;
+  color:white;
+  overflow:hidden;
+  height:100vh;
+}
+
+.screen {
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+
+.hidden {
+  display:none;
+}
+
+.full-img {
+  max-width:95%;
+  max-height:75vh;
+  border-radius:12px;
+}
+
+.background-img {
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+  opacity:0.35;
+}
+
+button {
+  padding:12px 20px;
+  font-size:18px;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  margin:10px;
+  transition:0.3s;
+}
+
+#yesBtn {
+  background:#00ffcc;
+  color:black;
+}
+
+#noBtn {
+  background:#ff3c3c;
+  color:white;
+  position:absolute;
+}
+
+/* vibrating no button */
+@keyframes vibrate {
+  0% { transform:translate(0,0); }
+  25% { transform:translate(2px,-2px); }
+  50% { transform:translate(-2px,2px); }
+  75% { transform:translate(2px,2px); }
+  100% { transform:translate(0,0); }
+}
+
+.vibrating {
+  animation:vibrate 0.15s infinite;
+}
+
+h2 {
+  background:rgba(0,0,0,0.6);
+  padding:10px 20px;
+  border-radius:10px;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div class="screen" id="screen1">
+  <img src="https://i.postimg.cc/2yQZvytC/Screenshot-20260208-181725.png" class="full-img">
+  <br>
+  <button onclick="nextScreen()">Continue 😈</button>
+</div>
+
+<!-- SCREEN 2 -->
+<div class="screen hidden" id="screen2">
+  <img src="https://i.postimg.cc/Y06Wg0s5/Screenshot-20260208-182351.png" class="background-img">
+  <h2>So… what do you say? 👀</h2>
+  <div>
+    <button id="yesBtn" onclick="yesClicked()">YES 😌</button>
+    <button id="noBtn" onmouseover="moveNo()" ontouchstart="moveNo()" class="vibrating">NO 🤡</button>
+  </div>
+</div>
+
+<!-- SCREEN 3 (Dancing Cat Meme Placeholder) -->
+<div class="screen hidden" id="screen3">
+  <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" class="full-img">
+  <br>
+  <button onclick="showFinal()">Okay okay 😭</button>
+</div>
+
+<!-- FINAL SCREEN -->
+<div class="screen hidden" id="finalScreen">
+  <img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" class="full-img">
+  <h1>FINALLY YES 😭🔥</h1>
+</div>
+
+<script>
+
+function nextScreen(){
+  document.getElementById("screen1").classList.add("hidden");
+  document.getElementById("screen2").classList.remove("hidden");
+}
+
+function moveNo(){
+  let btn = document.getElementById("noBtn");
+  let x = Math.random() * (window.innerWidth - 100);
+  let y = Math.random() * (window.innerHeight - 50);
+  btn.style.left = x + "px";
+  btn.style.top = y + "px";
+
+  let yes = document.getElementById("yesBtn");
+  let size = parseFloat(window.getComputedStyle(yes).fontSize);
+  yes.style.fontSize = (size + 3) + "px";
+}
+
+function yesClicked(){
+  document.getElementById("screen2").classList.add("hidden");
+  document.getElementById("screen3").classList.remove("hidden");
+}
+
+function showFinal(){
+  document.getElementById("screen3").classList.add("hidden");
+  document.getElementById("finalScreen").classList.remove("hidden");
+}
+
+</script>
+
+</body>
+</html>
